@@ -10,7 +10,7 @@ var Alivn = {
   "extra hint": "Handsome!!"
 }
 
-//var msg={};
+var msg={};
 
 app.get("/",function(req,res){
   res.json(Alivn);
