@@ -6,7 +6,7 @@ address = gets.chomp
 #local_url = "http://localhost:3000/"
 response = HTTParty.get(address)
 
-puts "sending"
+puts response
 
 answer = true
 while answer
