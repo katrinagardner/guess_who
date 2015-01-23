@@ -1,0 +1,55 @@
+<!doctype>
+<html>
+<body>
+
+    <h1>Giffy Image Search : Make sure you press right arrow key first for next picture.</h1>
+    <input type="text" name="giffy_search">
+    <button> Submit </button>
+    <img/>
+
+
+  <script>
+  var h1 = document.getElementById("h1");
+  var button = document.querySelector("button");
+
+
+  var photo = function(index){
+
+    var input = document.querySelector("input");
+
+    var search = encodeURI(input.value);
+    //console.log(search);
+
+    var url = "http://api.giphy.com/v1/gifs/search?api_key=dc6zaTOxFJmzC&q="+search;
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+    xhr.addEventListener("load", function(e){
+      //console.log(xhr.responseText)
+      var d=xhr.responseText;
+      var parsed=JSON.parse(d);
+      console.log(parsed);
+      var img = document.querySelector("img");
+      img.src= parsed.data[index]["images"]["original"]["url"];
+    });
+    xhr.send();
+  };
+
+  var counter = 0;
+
+  button.addEventListener("click",function(){
+     photo(counter);
+});
+   window.addEventListener("keydown",function(event){
+     if(event.keyCode === 39){
+       var new_counter = counter++ ;
+       photo(new_counter);
+     }
+     else if(event.keyCode === 37){
+       var new_counter = counter-- ;
+       photo(new_counter);
+ }
+   });
+//});
+</script>
+</body>
+</html>
